@@ -26,8 +26,8 @@ function getDataFromJsonApi()
 
 ?>
   <table class="table table-hover" id="dynamicTable">
-    <thead>
-      <tr>
+    <thead id="thead-dynamicTable">
+      <tr class="text-center">
         <th>Casino</th>
         <th>Bonus</th>
         <th>Features</th>
@@ -39,32 +39,41 @@ function getDataFromJsonApi()
       foreach ($jsonArray575 as $key => $value) {
       ?>
         <tr>
-          <td><img src="<?= $value["logo"]; ?>"><a href="<?= $value["brand_id"]; ?>">Review</a></td>
-          <td><?= $value["info"]["bonus"]; ?> </td>
+          <td data-label="Casino" class="text-center d-flex flex-column">
+            <img src="<?= $value["logo"]; ?>">
+            <a href="<?= $value["brand_id"]; ?>">Review</a>
+          </td>
+          <td data-label="Bonus" class="text-center">
+            <?php
+            $stars = "";
+            for ($i = 0; $i < $value["info"]["rating"]; $i++) {
+              $stars .= "★";
+            }
+            ?>
+            <p id="rating-stars"><?= $stars; ?></p>
+            <?= $value["info"]["bonus"]; ?>
+          </td>
           <?php
           $featuress = $value["info"]["features"];
           ?>
           <div class="d-flex flex-column">
-            <td>
-              <?php
-              foreach ($featuress as $k => $v) {
-              ?>
-                <ul>
-                  <li><?= $v; ?></li>
-                </ul>
-              <?php
-              }
-              ?>
+            <td data-label="Features">
+              <ul>
+                <?php
+                foreach ($featuress as $k => $v) {
+                ?>
+                  <li>&#8226; <?= $v; ?></li>
+                <?php
+                }
+                ?>
+              </ul>
             </td>
           </div>
-          <td>
-            <a href="<?= $value["play_url"]; ?>" class="btn btn-success">Play now</a>
+          <td data-label="Play" class="text-center">
+            <a href="<?= $value["play_url"]; ?>" class="btn btn-success mb-2">Play now</a>
             <p> <?= $value["terms_and_conditions"]; ?></p>
           </td>
         <?php
-        // echo "<pre>";
-        // print_r("rating:" . " " . $value["info"]["rating"]);
-        // echo "</pre>";
       };
         ?>
         </tr>
@@ -72,5 +81,13 @@ function getDataFromJsonApi()
   </table>
 <?php
 }
+
+function load_assets()
+{
+  wp_register_style('css', plugins_url('assets/css/style.css', __FILE__));
+  wp_enqueue_style('css');
+}
+
+add_action('init', 'load_assets');
 
 add_shortcode('restApiPlugin', 'getDataFromJsonApi');
