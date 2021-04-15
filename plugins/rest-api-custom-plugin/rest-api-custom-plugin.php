@@ -19,11 +19,14 @@ function getDataFromJsonApi()
   $jsonData = json_decode($jsonFile, true);
   $jsonArray575 = $jsonData['toplists']['575'];
 
-  // echo "<pre>";
-  // echo 'json 575 array';
-  // print_r($jsonArray575);
-  // echo "</pre>";
+  usort($jsonArray575, function ($a, $b) {
+    return $a['position'] <=> $b['position'];
+  });
 
+  echo "<pre>";
+  echo 'json 575 array';
+  print_r($jsonArray575);
+  echo "</pre>";
 ?>
   <table class="table table-hover" id="dynamicTable">
     <thead id="thead-dynamicTable">
@@ -41,7 +44,11 @@ function getDataFromJsonApi()
         <tr>
           <td data-label="Casino" class="text-center d-flex flex-column">
             <img src="<?= $value["logo"]; ?>">
-            <a href="<?= $value["brand_id"]; ?>">Review</a>
+            <?php
+            global $wp;
+            $currentUrl = add_query_arg($wp->query_vars, home_url());
+            ?>
+            <a href="<?= $currentUrl . '/' . $value["brand_id"]; ?>">Review</a>
           </td>
           <td data-label="Bonus" class="text-center">
             <?php

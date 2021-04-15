@@ -6,7 +6,7 @@
     <?php the_content(); ?>
   <?php endwhile; ?>
 <?php else : ?>
-  <h1>No post yet!</h1>
+  <h1>Hello 👋</h1>
 <?php endif; ?>
 
 <?php get_footer() ?>
