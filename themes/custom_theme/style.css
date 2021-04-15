@@ -1,3 +1,18 @@
 /*
 Theme Name: custom theme
 */
+
+body{
+  background-color: #DADED4;
+}
+
+@media (min-width: 700px){
+  #customFlexContainer{
+    margin: 40px 140px;
+  }
+}
+@media (max-width: 700px){
+  #customFlexContainer{
+    margin: 10px 30px;
+  }
+}

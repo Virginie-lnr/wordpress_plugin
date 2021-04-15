@@ -1,0 +1,1 @@
+/Users/virginielenoir/Local Sites/wordpresstest/app/public/wp-content/plugins/query-monitor/wp-content/db.php

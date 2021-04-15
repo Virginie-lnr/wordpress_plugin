@@ -14,6 +14,8 @@ function customtheme_register()
   wp_register_script('jquery', 'https://code.jquery.com/jquery-3.4.1.slim.min.js', [], false, true);
   wp_enqueue_style('bootstrap');
   wp_enqueue_script('bootstrap');
+  wp_register_style('cssTheme', get_template_directory_uri() . '/style.css');
+  wp_enqueue_style('cssTheme');
 };
 
 // add wordpress theme
