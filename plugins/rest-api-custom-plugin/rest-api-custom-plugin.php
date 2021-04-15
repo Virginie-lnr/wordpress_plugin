@@ -19,41 +19,58 @@ function getDataFromJsonApi()
   $jsonData = json_decode($jsonFile, true);
   $jsonArray575 = $jsonData['toplists']['575'];
 
-  echo "<pre>";
-  echo "json data:";
-  print_r($jsonData);
-  echo "</pre>";
-  echo '--------------------';
-  echo "<pre>";
-  echo 'json array 575';
-  print_r($jsonArray575);
-  echo "</pre>";
-  foreach ($jsonArray575 as $key => $value) {
-    echo "<pre>";
-    print_r("brand_id:" . " " .  $value["brand_id"]);
-    echo "</pre>";
-    echo "<pre>";
-    print_r("logo:" . " " . $value["logo"]);
-    echo "</pre>";
-    $featuress = $value["info"]["features"];
-    foreach ($featuress as $k => $v) {
-      echo "<pre>";
-      print_r("features:" . " " . $v);
-      echo "</pre>";
-    }
-    echo "<pre>";
-    print_r("play_url:" . " " . $value["play_url"]);
-    echo "</pre>";
-    echo "<pre>";
-    print_r("terms_and_conditions:" . " " . $value["terms_and_conditions"]);
-    echo "</pre>";
-    echo "<pre>";
-    print_r("rating:" . " " . $value["info"]["rating"]);
-    echo "</pre>";
-    echo "<pre>";
-    print_r("bonus:" . " " . $value["info"]["bonus"]);
-    echo "</pre>";
-  };
+  // echo "<pre>";
+  // echo 'json 575 array';
+  // print_r($jsonArray575);
+  // echo "</pre>";
+
+?>
+  <table class="table table-hover" id="dynamicTable">
+    <thead>
+      <tr>
+        <th>Casino</th>
+        <th>Bonus</th>
+        <th>Features</th>
+        <th>Play</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      foreach ($jsonArray575 as $key => $value) {
+      ?>
+        <tr>
+          <td><img src="<?= $value["logo"]; ?>"><a href="<?= $value["brand_id"]; ?>">Review</a></td>
+          <td><?= $value["info"]["bonus"]; ?> </td>
+          <?php
+          $featuress = $value["info"]["features"];
+          ?>
+          <div class="d-flex flex-column">
+            <td>
+              <?php
+              foreach ($featuress as $k => $v) {
+              ?>
+                <ul>
+                  <li><?= $v; ?></li>
+                </ul>
+              <?php
+              }
+              ?>
+            </td>
+          </div>
+          <td>
+            <a href="<?= $value["play_url"]; ?>" class="btn btn-success">Play now</a>
+            <p> <?= $value["terms_and_conditions"]; ?></p>
+          </td>
+        <?php
+        // echo "<pre>";
+        // print_r("rating:" . " " . $value["info"]["rating"]);
+        // echo "</pre>";
+      };
+        ?>
+        </tr>
+    </tbody>
+  </table>
+<?php
 }
 
 add_shortcode('restApiPlugin', 'getDataFromJsonApi');
