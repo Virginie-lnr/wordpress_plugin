@@ -5,7 +5,7 @@ ul{
 
 
 #dynamicTable{
-background-color: #F3F3F3;
+background-color: white;
 }
 
 #thead-dynamicTable{
@@ -21,7 +21,7 @@ background-color: #F3F3F3;
   padding: .5em;
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 1000px) {
   table td {
     text-align: center;
   }
@@ -34,7 +34,7 @@ background-color: #F3F3F3;
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
   table{
     width: 100%;
   }

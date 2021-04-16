@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name:       Rest Api Custom Plugin
- * Description:       Get reviews data from a REST API 
+ * Description:       Dynamic table with data from Json API 
  * Version:           1.0
  * Author:            Virginie Lenoir
  * Text domain:       rest-api-custom-plugin
@@ -19,16 +19,15 @@ function getDataFromJsonApi()
   $jsonData = json_decode($jsonFile, true);
   $jsonArray575 = $jsonData['toplists']['575'];
 
+  /**
+   * Sort array 575 by position number (ASC)
+   */
   usort($jsonArray575, function ($a, $b) {
     return $a['position'] <=> $b['position'];
   });
 
-  // echo "<pre>";
-  // echo 'json 575 array';
-  // print_r($jsonArray575);
-  // echo "</pre>";
 ?>
-  <table class="custom-table table-hover" id="dynamicTable">
+  <table class="custom-table table-hover mx-auto" id="dynamicTable">
     <thead id="thead-dynamicTable">
       <tr class="text-center">
         <th>Casino</th>
@@ -77,7 +76,7 @@ function getDataFromJsonApi()
             </td>
           </div>
           <td data-label="Play"><br>
-            <a href="<?= $value["play_url"]; ?>" class="btn btn-success mb-3 td-item">Play now</a>
+            <a href="<?= $value["play_url"]; ?>" class="btn btn-success mb-2 td-item">Play now</a>
             <p><?= $value["terms_and_conditions"]; ?></p>
           </td>
         <?php
