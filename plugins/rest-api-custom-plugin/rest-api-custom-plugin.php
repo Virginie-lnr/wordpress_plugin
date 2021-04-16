@@ -23,12 +23,12 @@ function getDataFromJsonApi()
     return $a['position'] <=> $b['position'];
   });
 
-  echo "<pre>";
-  echo 'json 575 array';
-  print_r($jsonArray575);
-  echo "</pre>";
+  // echo "<pre>";
+  // echo 'json 575 array';
+  // print_r($jsonArray575);
+  // echo "</pre>";
 ?>
-  <table class="table table-hover" id="dynamicTable">
+  <table class="custom-table table-hover" id="dynamicTable">
     <thead id="thead-dynamicTable">
       <tr class="text-center">
         <th>Casino</th>
@@ -42,22 +42,22 @@ function getDataFromJsonApi()
       foreach ($jsonArray575 as $key => $value) {
       ?>
         <tr>
-          <td data-label="Casino" class="text-center d-flex flex-column">
-            <img src="<?= $value["logo"]; ?>">
+          <td data-label="Casino" class="d-flex flex-column">
+            <img src="<?= $value["logo"]; ?>" class="td-item">
             <?php
             global $wp;
             $currentUrl = add_query_arg($wp->query_vars, home_url());
             ?>
-            <a href="<?= $currentUrl . '/' . $value["brand_id"]; ?>">Review</a>
+            <a href="<?= $currentUrl . '/' . $value["brand_id"]; ?>" class="mt-3">Review</a>
           </td>
-          <td data-label="Bonus" class="text-center">
+          <td data-label="Bonus">
             <?php
             $stars = "";
             for ($i = 0; $i < $value["info"]["rating"]; $i++) {
               $stars .= "★";
             }
             ?>
-            <p id="rating-stars"><?= $stars; ?></p>
+            <p id="rating-stars" class="td-item"><?= $stars; ?></p>
             <?= $value["info"]["bonus"]; ?>
           </td>
           <?php
@@ -65,20 +65,20 @@ function getDataFromJsonApi()
           ?>
           <div class="d-flex flex-column">
             <td data-label="Features">
-              <ul>
+              <ul class="td-item">
                 <?php
                 foreach ($featuress as $k => $v) {
                 ?>
-                  <li>&#8226; <?= $v; ?></li>
+                  <li>&#9673; <?= $v; ?></li>
                 <?php
                 }
                 ?>
               </ul>
             </td>
           </div>
-          <td data-label="Play" class="text-center">
-            <a href="<?= $value["play_url"]; ?>" class="btn btn-success mb-2">Play now</a>
-            <p> <?= $value["terms_and_conditions"]; ?></p>
+          <td data-label="Play"><br>
+            <a href="<?= $value["play_url"]; ?>" class="btn btn-success mb-3 td-item">Play now</a>
+            <p><?= $value["terms_and_conditions"]; ?></p>
           </td>
         <?php
       };
